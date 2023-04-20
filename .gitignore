@@ -1,0 +1,6 @@
+rough_code/
+rough_data/
+.ipynb_check*
+.vscode
+.RData
+.Rhistory
