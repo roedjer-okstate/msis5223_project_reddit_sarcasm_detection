@@ -933,6 +933,167 @@ The regression lines on the scatterplot indicate that there is no significant re
 
 Overall, the scatterplot suggests that sarcasm is a prevalent form of communication among Reddit users, regardless of their level of engagement on the platform.<br>
 
+## Text Mining and Sentiment Analysis
+
+### Sentiment Analysis
+
+`nrclex` library in Python was applied for sentiment analysis. 2 pairs of sentiments/emotions were picked to conduct sentiment analysis as follows:
+
+1. `Trust` vs. `Fear`
+2. `Disgust` vs. `Surprise`
+
+It is worth pointing out that **affect frequency** of sentiments in a Reddit comment was applied in our analysis for comparison as well as feeding into future models as predictors. Affect frequency refers to the frequency with which emotional words or expressions are used in a given text, while normal frequency refers to the frequency of all words in the text. Affect frequency can offer several advantages over normal frequency in sentiment analysis and other natural language processing tasks. Firstly, it can help identify the emotional content of a text more accurately, as emotional words and expressions are more indicative of the sentiment and tone of the text than other words. This can result in more precise sentiment scores and a better understanding of the overall sentiment of the text. Secondly, affect frequency can help normalize language use and overcome imbalances in the occurrence of different types of words in a text. By using affect frequency, sentiment analysis models can provide more reliable and accurate results that are less affected by such imbalances. Finally, affect frequency can reveal trends and patterns in emotional language use over time or across different contexts. By analyzing the affect frequency of a text over a period of time or in different domains, sentiment analysis models can provide valuable insights into how emotions are expressed and perceived in different contexts, and how they change over time. Overall, using affect frequency can enhance the accuracy and reliability of sentiment analysis, and provide deeper insights into the emotional content of a text.
+
+1. **`Trust` vs. `Fear`**<br>
+
+There are several reasons why `trust` and `fear` may be a good choice of emotions to use for sentiment analysis in a Reddit sarcasm detection project. First, `trust` and `fear` are widely recognized as fundamental emotions that are commonly expressed in human communication. They are also emotions that are often associated with sarcasm, irony, and other forms of subtle and nuanced language use, which makes them particularly relevant for sarcasm detection. Second, `trust` and `fear` are often seen as opposing emotions, which means that their presence in a text can provide a valuable contrast that can help identify the underlying sentiment and tone of the message. Finally, `trust` and `fear` are emotions that are likely to be expressed in a variety of contexts, which makes them suitable for use in a broad range of Reddit conversations and topics. Overall, selecting `trust` and `fear` as emotions for sentiment analysis in a Reddit sarcasm detection project can provide a useful and reliable way to identify the underlying sentiment and tone of text, and help detect sarcastic or ironic expressions.
+
+The frequency bar chart and wordcloud top 20 most common `trust` words in our dataset is as shown below:<br>
+
+<img src = 'assets/topic_sentiment_analysis/01_trustfear.png' width=700><br>
+
+<img src = 'assets/topic_sentiment_analysis/02_trustfear.png' width=400><br>
+
+Good, money, and white appeared to be the three most common words for `trust`.<br>
+
+On the other hand, the frequency bar chart and wordcloud top 20 most common `fear` words in our dataset is as shown below:<br>
+
+<img src = 'assets/topic_sentiment_analysis/03_trustfear.png' width=700><br>
+
+<img src = 'assets/topic_sentiment_analysis/04_trustfear.png' width=400><br>
+
+Bad, government, and war appeared to be the three most common words for `trust`.<br>
+
+Comparison of average affect frequency between `fear` and `trust` in a Reddit comment with and without taking consideration of sarcasm label:<br>
+
+<img src = 'assets/topic_sentiment_analysis/05_trustfear.png' width=700><br>
+
+<img src = 'assets/topic_sentiment_analysis/06_trustfear.png' width=700><br>
+
+By comparing the average affect frequency between `fear` and `trust` in a Reddit comment in general, `trust` was more common at average affect frequency of 0.086 per comment as compared to `fear` at 0.0526 per comment. The higher average affect frequency for `trust` as compared to `fear` suggests that `trust` was a more commonly expressed emotion in Reddit comments than `fear`. However, when taking sarcasm label into account, both `fear` and `trust` were slightly more common when there was no sarcasm detected in the comments. This finding may suggest that in sarcastic comments, emotions other than fear and trust are slightly more commonly used to express sarcasm. Alternatively, it could indicate that in non-sarcastic comments, fear and trust are more frequently expressed emotions as they convey sincerity and authenticity, whereas in sarcastic comments, people may use other emotions to convey a sense of irony or humor. This highlights the importance of considering contextual factors, such as sarcasm, when analyzing emotional language use in natural language processing tasks.
+
+**Example Reddit Comments Containing `Fear` and `Trust`**
+
+*Where sarcasm was present*
+
+<img src = 'assets/topic_sentiment_analysis/13_validation.png' width=700><br>
+
+*Where sarcasm was not present*
+
+<img src = 'assets/topic_sentiment_analysis/14_validation.png' width=700><br>
+
+The sentiments presented in the examples are closely related to the intention of the comment author. For instances, `fear` emotion can be found in comment related to political ideology and `trust` emotion can be found in comment related to employment or office relationship.  <br>
+
+
+2. **`Surprise` vs. `Disgust`**<br>
+
+Using the pair of emotions `surprise` vs. `disgust` in sentiment analysis for a Reddit sarcasm detection project can provide valuable insights into the emotional content of the comments. `Surprise` is often associated with positive emotions, such as excitement, delight, and amazement, whereas `disgust` is associated with negative emotions, such as aversion, revulsion, and contempt. By comparing the affect frequency of these two emotions in the comments, the sentiment analysis model can identify the overall emotional tone and sentiment of the comments, and potentially detect instances of sarcasm or irony that may be expressed through the use of unexpected or contradictory emotions. Additionally, `surprise` and `disgust` are often expressed through distinctive lexical and syntactic patterns, which can aid in the development of more accurate and effective sentiment analysis models. Therefore, the use of `surprise` vs. `disgust` in sentiment analysis can be a useful approach in detecting sarcasm and other nuanced forms of emotional expression in Reddit comments.
+
+The frequency bar chart and wordcloud top 20 most common `surprise` words in our dataset is as shown below:<br>
+
+<img src = 'assets/topic_sentiment_analysis/07_surprisedisgust.png' width=700><br>
+
+<img src = 'assets/topic_sentiment_analysis/08_surprisedisgust.png' width=400><br>
+
+Good, trump, and money appeared to be the three most common words for `surprise`.<br>
+
+On the other hand, the frequency bar chart and wordcloud top 20 most common `disgust` words in our dataset is as shown below:<br>
+
+<img src = 'assets/topic_sentiment_analysis/09_surprisedisgust.png' width=700><br>
+
+<img src = 'assets/topic_sentiment_analysis/10_surprisedisgust.png' width=400><br>
+
+Bad, government, and war appeared to be the three most common words for `disgust`.<br>
+
+Comparison of average affect frequency between `surprise` and `disgust` in a Reddit comment with and without taking consideration of sarcasm label:<br>
+
+<img src = 'assets/topic_sentiment_analysis/11_surprisedisgust.png' width=700><br>
+
+<img src = 'assets/topic_sentiment_analysis/12_surprisedisgust.png' width=700><br>
+
+By comparing the average affect frequency between `surprise` and `disgust` in a Reddit comment in general, both sentiments were having a similar average sentiment weight in a Reddit comment at about 0.03 which suggest that both emotions were as commonly being expressed as each other in our dataset. However, when taking sarcasm label into account, the results showed that the `surprise` emotion had a stronger association with non-sarcastic comments, while `disgust` was more associated with sarcasm when comparing the two emotions. This finding suggests that the use of surprise in a comment may be indicative of a sincere expression of emotion, whereas the use of disgust may be more likely to signal sarcasm or irony. <br>
+
+**Example Reddit Comments Containing `Surprise` and `Disgust`**
+
+*Where sarcasm was present*
+
+<img src = 'assets/topic_sentiment_analysis/15_validation.png' width=700><br>
+
+*Where sarcasm was not present*
+
+<img src = 'assets/topic_sentiment_analysis/16_validation.png' width=700><br>
+
+The sentiments presented in the examples are closely related to the intention of the comment author. For instances, `surprise` emotion can be found in comment praising a movie and `disgust` emotion can be found in comment related to feaces.  <br>
+
+### Topic Analysis
+
+Topic analysis is a useful approach for detecting sarcasm. By identifying the topics and themes present in a comment, topic analysis can provide contextual clues that can help distinguish between sarcastic and sincere statements. Furthermore, the combination of topic analysis with other techniques, such as sentiment analysis and affect frequency analysis done previously, can further improve the accuracy and effectiveness of sarcasm detection models.<br>
+
+To conduct a topic analysis, a `CountVectorizer` was initialized with `max_df` of 0.8 indicating the maximum occurence of a term was 80% of the documents and `min_df` of 10 indicating the minimum number of documents a word must appear in was 10 documents. Then, a document-term matrix was created by fitting and transforming the text data using the vectorizer. The document-matrix was subsequently fitted into `Latent Dirichlet Allocation (LDA)` to create 4 topics. The resulted top 10 words for each topic are as shown:
+
+<img src = 'assets/topic_sentiment_analysis/17_topic.png' width=700><br>
+
+Based on the result above, the 4 topics from Reddit comments in our dataset can be summarized as follows:
+
+- **Topic #0: Casual Conversations**
+
+This topic seems to be centered around casual conversations on Reddit with terms like "guy", "make", "good", and "yeah" appearing frequently. The word "fuck" is likely used as a form of emphasis in casual speech. The word "white" could potentially refer to race or just be a common adjective used in conversation. The word "ca" is likely an abbreviation for "can't" or "cannot". Overall, this topic appears to be centered around everyday conversations that people might have.
+
+- **Topic #1: Relationships and Personal Reflections**
+
+This topic appears to focus on personal reflections and relationships. Words like "child," "love," and "woman" suggest discussions around family and romantic relationships. The words "reddit," "think," and "got" may indicate that these are personal stories being shared in an online forum.
+
+- **Topic #2: Mixed Topics**
+
+This topic could be related to government, particularly in the context of how government operates and how it can be improved. The word "best" may suggest a discussion of best practices, while the words "really" and "better" may indicate a desire for improvement. However, the other words in the topic, such as "nan" and "jerry," don't seem to fit with a political discussion. It's possible that this topic contains a mixture of discussions, or that the word "government" appeared incidentally in a few posts that were primarily about other discussions. 
+
+- **Topic #3: Politics and Current Events**
+
+This topic appears to be focused on politics and current events. Words like "government," "trump," and "people" suggest a discussion about policies and leaders. The words "great" and "sure" may indicate a positive or optimistic perspective on certain political events or outcomes. However, these words may bring sarcastic sentiments too. The word "forgot" may suggest that the conversation is centered around a past event or issue that has been overlooked.<br>
+
+**Relationship between Topics and Respective Sentiments as well as Sarcastic Features**
+
+| Topic | Fear | Trust | Disgust | Surprise | Label |
+| -- | :-- | :-- | :-- | :-- | :-- |
+| 0 | 0.053 | 0.078 | 0.032 | 0.027 | 0.53 |
+| 1 | 0.047 | 0.087 | 0.030 | 0.025 | 0.37 |
+| 2 | 0.058 | 0.092 | 0.032 | 0.022 | 0.40 |
+| 3 | 0.053 | 0.089 | 0.029 | 0.048 | 0.56 |
+
+- `Label` - Probability of sarcastic comments
+
+Topic 3 that is related to politics and current events has the highest weight of sarcasm which aligns to our previous descriptive analytics where `politcs` and `worldnews` are the most sarcastic subreddits. Topic 0 has the second highest sarcasm weight as it is related to casual conversation and it makes sense as sarcasm could take place in normal day-to-day conversation according to human nature. On the contrary, Topic 1 is the least sarcastic. This makes sense too because typically people will be more sensitive when it comes to relationships and personal reflection because mental health and kindness are taken into consideration before leaving comment in related Reddit Post. Topic 2 is relatively low sarcastic but since it is related to discussion of mixed topic, no hard conclusion can be made.
+
+- Average Affect Frequency of `Fear` and `Trust`
+
+Topic 0 has the least amount of trust (0.078) and moderate fear (0.053) among all the topics. This suggests that the topic is centered around casual conversations and does not contain any particularly polarizing or controversial topics. Topic 1 has a moderate level of trust (0.087) and fear (0.047). This may suggest that the topic includes personal stories and reflections, which may evoke emotions but are not necessarily controversial. Topic 2 has the highest level of trust (0.092) and a slightly higher level of fear (0.058). This could be due to the potential political nature of the topic, which could be a source of anxiety or uncertainty for some people. Topic 3 has a moderate level of trust (0.089) and a higher level of fear (0.053), which suggests that the topic could be focused on more polarizing issues such as politics and current events.
+
+- Average Affect Frequency of `Disgust` and `Surprise`
+
+In terms of disgust, none of the topics have particularly high or low values, with the highest being 0.032 for topics 0 and 2. For surprise, the values are also relatively low for all topics, with the highest being 0.048 for topic 3. This suggests that the topics are not particularly surprising or unexpected in nature except for topic 3 as it is related to politics and current events that might be shocking.
+
+In summary, the topic analysis is somewhat related to the sentiment analysis done previously. For example, when politcal views are brought up, `fear`, `trust`, and `surprise` emotions are relatively significant. When relationship and personal reflection elements are found in comments, only `trust` element appears to be significant. On the other hand, when it is just a conversation, `trust` carries the lowest weight while `disgust` appears to be slightly more significant as the language used might contain disgusting elements (Redditors are anonymous).<br>
+
+### Named-Entity Recognition Analysis
+
+- **Person Entity**
+
+<img src = 'assets/topic_sentiment_analysis/19_NER_PERSON.png' width=700><br>
+
+Politicians like "Trump", "Obama", and "Hilary" are mostly brought up in Reddit comments based on the graph above. Since most of the person entities in our dataset are political related, the sarcasm rate is high overall. This further supports the nature of Reddit where users are anonymous and they will be having a higher tendency to leave sarcastic comments discussing politicians.
+
+- **Location Entity**
+
+<img src = 'assets/topic_sentiment_analysis/20_NER_LOCATION.png' width=700><br>
+
+The common locations being mentioned in the comments in our dataset are mostly countries or territories that are geo-politically controversial like "Israel", "Russia", and "China". The geo-political controversies may arise tons of sarcastic comments making the sarcasm rate high as shown in the graph. "America", on the other hand, acts as a global leader and Redditors seem to be very sarcastic to any event happening in the mentioned country.
+
+- **Organization Entity**
+
+<img src = 'assets/topic_sentiment_analysis/21_NER_ORGANIZATION.png' width=700><br>
+
+Similarly to locations, the common organizations mentioned in the Reddit comments are highly related to politics and world events like "US", "ISIS", and "Muslim". It aligns to every analysis done previously where `politics` and `worldnews` subreddits are not only common in Reddits, but also having the higher tendency of sarcastic comments. US political party like "GOP" or "Republican" and "DNC" or "Democrats" have balanced sarcasm rate and it may be due to the fact that supporters for each party (cover almost 50% of the voter population for each party) leaving less sarcastic comments and as a result balancing the sarcasm rate.
+
 ## Conclusion and Discussion
 We see that there is a considerable amount of sarcastic comments on different reddit threads. The ability to detect sarcasm in any text will help summarizing the context of the text better. One application of the sarcasm detector is to help out people (and the social media platform) with better information. In this way, the said social media platform can restrict that post, comment or thread from reaching a lot of people. Sarcastic remarks are often harmful leading to dire consequences. The sarcasm detector should have a positive influence on understanding the way that we do natural language understanding. 
 Following are few potential implications of a sarcasm detector:
