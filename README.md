@@ -1127,6 +1127,20 @@ The following is a snapshot of the descriptive statistics for a few columns for 
 
 We again see that the value of the standard deviation and the median are more or less equal across the training, test and validation data sets with a slight bit difference in the mean. This might be because of the way that the data has been sampled (due to a certain random seed being set). 
 
+Now, we look at the distribution of the different 'Subreddit' categories in the predictor variables and the proportion of 1s and 0s in the target variable across the training, validation, and test set for both the transformed and the untransformed data set. 
+
+First, we will look at these proportions in the transformed data set. Below is an image of the same. 
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/Transformed%20data%20proportion.png)
+
+We see that the proportion of the different subreddit categories across the training, test, and validation set is almost the same. The proportion of 1s and 0s (in the target variable) is also almost the same across the three data partitioning groups. 
+
+Now, we will look at these proportions in the untransformed data set. Below is an image of the same. 
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/UnTransformed%20data%20proportion.png)
+
+We see that the proportion of the different subreddit categories across the training, test, and validation set is almost the same. The proportion of 1s and 0s (in the target variable) is also almost the same across the three data partitioning groups. 
+
+This means that our training, test, and validation data is representative of our population. Models built on the training data, tuned using the validation data and finally predicted on the test data should have the desired results and we should be able to put the model in production given that the next set of subreddits follows a similar split in proportion. 
+
 ## Select Modeling Techniques
 
 
