@@ -355,7 +355,7 @@ plot_conf_matrix(
 
 
 #############################################################################################################################################
-################################### Model V1 - Model Explanation using Feature Importance and SHAP ##########################################
+################################### Model V2 - Model Explanation using Feature Importance and SHAP ##########################################
 
 ### Feature importance values
 features = pd.DataFrame()
