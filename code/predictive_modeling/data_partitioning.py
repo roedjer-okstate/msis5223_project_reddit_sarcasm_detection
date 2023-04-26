@@ -24,6 +24,18 @@ print("-------------"*10, end="\n\n")
 vec_df_comments = pd.read_csv('data/vectorized_text_data/comments_data_vectorized.csv')
 vec_df_p_comments = pd.read_csv('data/vectorized_text_data/parent_comments_data_vectorized.csv')
 
+# load the topic sentiment data extracted from the sentiment analysis
+topic_sentiment_data = pd.read_csv('data/topic_sentiment_data/topic_sentiment_data.csv')
+
+# merge the topic sentiment analysis data to the original dataset
+df = pd.merge(
+    df, 
+    topic_sentiment_data,
+    on = 'id',
+    how = 'left'
+)
+df['age_of_account'] = (pd.Timestamp.today() - pd.to_datetime(df['date'])).dt.days
+
 
 print(vec_df_comments.head(3), end="\n\n")
 print("-------------"*10, end="\n\n")
@@ -80,7 +92,7 @@ merged_vec_comments = merged_vec_comments.dropna()
 final_df_vectorized = pd.merge(
     df[
         ['id', 'cleaned_comment', 'comment', 'cleaned_parent_comment', 'parent_comment',
-         'label', 'author', 'subreddit', 'score', 'ups', 'downs', 'date']
+         'label', 'author', 'subreddit', 'score', 'ups', 'downs', 'date', 'fear', 'trust', 'disgust', 'surprise', 'topic', 'age_of_account']
     ],
     merged_vec_comments[['id'] + list(merged_vec_comments.columns.difference(df.columns))],
     on = 'id'
