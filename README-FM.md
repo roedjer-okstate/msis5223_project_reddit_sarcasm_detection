@@ -25,6 +25,7 @@ _X_train, X_test, _Y_train, Y_test = train_test_split(
 )
 ```
 
+<br><br><br>
 
 # Select Modeling Techniques
 
@@ -64,3 +65,127 @@ Random Forest is a tree-based model that is suitable for both classification and
 * Random Forest is also a relatively simple ensemble model that is easier to interpret compared to other more complex ensemble learning techniques like Gradient Boosted Decision Trees. It is definitely easier to interpret compared to Neural Networks. Interpretation is an important requirement for us since we want to understand the major contributors that help in identifying sarcasm. It is also relatively easier to train that more complex ensemble learning models like Gradient Boosted Decision Trees and Neural Networks. which requires more computing power for the training process and can be an overkill for smaller datasets. 
 
 Hence, all these reasons make Random Forest a sensible choice for the problem that we are trying to tackle.
+
+
+<br><br><br>
+
+# Build the Models
+
+
+### Random Forest with PCA Transformed Input Features (RF Model 1)
+
+<br>
+
+**RF Model 1 - Best Model Hyperparameters**  
+
+![assets](assets/predictive_analysis/random_forest/model1_2.png)
+
+* Max Depth of the Trees = 21
+* Min Number of Samples in Leaf = 10
+* Min Weight Fraction in Leaf = 0.00067
+* Number of Estimators = 100
+
+<br>
+
+**RF Model 1 - Feature Importance Plot**  
+
+![assets](assets/predictive_analysis/random_forest/model1_7.png)
+
+
+<br>
+
+**RF Model 1 - Model Interpetation using Shapely Additive Explanations (SHAP)**  
+
+
+![assets](assets/predictive_analysis/random_forest/model1_8.png)
+
+![assets](assets/predictive_analysis/random_forest/model1_9.png)
+
+![assets](assets/predictive_analysis/random_forest/model1_10.png)
+
+![assets](assets/predictive_analysis/random_forest/model1_11.png)
+
+
+### Random Forest without Transformed Features i.e. using the base features (RF Model 2)
+
+<br>
+
+**RF Model 2 - Best Model Hyperparameters**  
+
+![assets](assets/predictive_analysis/random_forest/model2_2.png)
+
+* Max Depth of the Trees = 21
+* Min Number of Samples in Leaf = 10
+* Min Weight Fraction in Leaf = 0.00067
+* Number of Estimators = 100
+
+<br>
+
+**RF Model 2 - Feature Importance Plot**  
+
+![assets](assets/predictive_analysis/random_forest/model2_7.png)
+
+
+<br>
+
+**RF Model 2 - Model Interpetation using Shapely Additive Explanations (SHAP)**  
+
+
+![assets](assets/predictive_analysis/random_forest/model2_8.png)
+
+![assets](assets/predictive_analysis/random_forest/model2_9.png)
+
+![assets](assets/predictive_analysis/random_forest/model2_10.png)
+
+![assets](assets/predictive_analysis/random_forest/model2_11.png)
+
+
+<br><br><br>
+
+# Assess the Models
+
+
+### Random Forest with PCA Transformed Input Features (RF Model 1)
+
+<br>
+
+**RF Model 1 - Classification Report (Test Set)**  
+
+![assets](assets/predictive_analysis/random_forest/model1_4.png)
+
+<br>
+
+**RF Model 1 - Area Under the ROC(Receiver Operating Characteristics) Curve (Test Set)** 
+
+![assets](assets/predictive_analysis/random_forest/model1_5.png)
+
+<br>
+
+**RF Model 1 - Confusion Matrix (Test Set)** 
+
+![assets](assets/predictive_analysis/random_forest/model1_6.png)
+
+<br>
+
+
+### Random Forest without Transformed Features i.e. using the base features (RF Model 2)
+
+<br>
+
+**RF Model 2 - Classification Report (Test Set)**  
+
+![assets](assets/predictive_analysis/random_forest/model2_4.png)
+
+<br>
+
+**RF Model 2 - Area Under the ROC(Receiver Operating Characteristics) Curve (Test Set)** 
+
+![assets](assets/predictive_analysis/random_forest/model2_5.png)
+
+<br>
+
+**RF Model 2 - Confusion Matrix (Test Set)** 
+
+![assets](assets/predictive_analysis/random_forest/model2_6.png)
+
+<br>
