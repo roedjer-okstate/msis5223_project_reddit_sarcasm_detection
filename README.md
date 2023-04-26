@@ -1100,6 +1100,33 @@ Similarly to locations, the common organizations mentioned in the Reddit comment
 ## Data Splitting and Sub-Sampling
 
 
+The following are the images for descriptive statistics for train, test and validation data for the transformed data set. This means we will look at some of the basic descriptive statistics for the data set that has been reduced using Principal Component Analysis. 
+
+The following is a snapshot of the descriptive statistics for a few columns for the training dataset of transformed (reduced) variables.
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/df_X_train_transformed.png)
+
+The following is a snapshot of the descriptive statistics for a few columns for the test dataset of transformed (reduced) variables.
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/df_X_test_transformed.png)
+
+The following is a snapshot of the descriptive statistics for a few columns for the validation dataset of transformed (reduced) variables.
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/df_X_val_transformed.png)
+
+We see that the standard deviation and median are more or less equal across the training, test and validation data sets with a slight bit difference in the mean. This might be because of the way that the data is structured and we could resort to sampling the data multiple times, building ensemble models on it and then reaching a conclusion. But we are not going to do that over here as we believe that mean is a measure that is affected by extreme values very easily and therefore focus on building the models on training data, tune the models using the validation data and finally predict on the test data.
+
+
+The following are the images for descriptive statistics for train, test and validation data for the original (untransformed) data set. This means we will look at some of the basic descriptive statistics for the data set that has not been reduced using Principal Component Analysis. This is the original data that we had put together from Kaggle and web scraping. 
+
+The following is a snapshot of the descriptive statistics for a few columns for the training dataset of untransformed (original) variables. 
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/df_X_train_untransformed.png)
+
+The following is a snapshot of the descriptive statistics for a few columns for the test dataset of untransformed (original) variables. 
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/df_X_test_untransformed.png)
+
+The following is a snapshot of the descriptive statistics for a few columns for the validation dataset of untransformed (original) variables. 
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/df_X_val_untransformed.png)
+
+We again see that the value of the standard deviation and the median are more or less equal across the training, test and validation data sets with a slight bit difference in the mean. This might be because of the way that the data has been sampled (due to a certain random seed being set). 
+
 ## Select Modeling Techniques
 
 
