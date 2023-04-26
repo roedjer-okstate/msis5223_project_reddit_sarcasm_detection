@@ -1139,7 +1139,7 @@ Now, we will look at these proportions in the untransformed data set. Below is a
 
 We see that the proportion of the different subreddit categories across the training, test, and validation set is almost the same. The proportion of 1s and 0s (in the target variable) is also almost the same across the three data partitioning groups. 
 
-This means that our training, test, and validation data is representative of our population. Models built on the training data, tuned using the validation data and finally predicted on the test data should have the desired results and we should be able to put the model in production given that the next set of subreddits follows a similar split in proportion. 
+This means that our training, test, and validation data is representative of our population. Models built on the training data, tuned using the validation data and finally predicted on the test data should have the desired results and we should be able to put the model in production given that the next set of subreddits follows a similar split in proportion. The split is equal across both transformed and untransformed data to control for everything else except the Principal Component Analysis transformation. 
 
 ## Select Modeling Techniques
 
