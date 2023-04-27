@@ -89,22 +89,51 @@ Hence, all these reasons make Random Forest a sensible choice for the problem th
 
 **RF Model 1 - Feature Importance Plot**  
 
-![assets](assets/predictive_analysis/random_forest/model1_7.png)
+We have extracted the feature importance values from the Random Forest Model built and shown the top 30 features in the bar plot below. 
 
+From this bar plot we can see that the top 2 features in terms of importance are `Compoent 2 derived from the PCA transformation of the Comments TFIDF Vectors` & `Compoent 3 derived from the PCA transformation of the Comments TFIDF Vectors`. Component 2 seems to be disproportionately the most important feature in predicing sarcastic comments which indicates that it is probably composed of words or terms that show up in the comments that are very indicative of a comment being sarcastic or not. Most of these key terms or words have probably been condensed into these two top principal components. However, one issue assoicated with this interpretation is that we cannot actually identify what these components are composed of which reduces the explanability of the model. Hence, as we discussed earlier, we will also be building a model that is solely made up of untransformed features.
+
+Analyzing this further, we can see from the feature importance plot that the `Name of the Subreddit`, the `Age of the Account` and also the `Score` obtained on the comment (Upvotes - Downvotes) are also good indicators of sarcasm in a comment. This could be because some more serious subreddits like `science` etc. would have less sarcasm whereas subreddits with hot and usually controversial topics like `politics` or subreddits made for `jokes` and `memes` could have more sarcasm going on. Age of the account could be a factor because it is more likely that seasoned users that have been using these platforms for a longer period of time could be more likely to comment something sarcastic. 
+
+
+<br>
+
+![assets](assets/predictive_analysis/random_forest/model1_7.png)
 
 <br>
 
 **RF Model 1 - Model Interpetation using Shapely Additive Explanations (SHAP)**  
 
+We have used SHAP for obtaining a better and deeper interpretation of the Random Forest model developed. It uses game theory based concepts to attribute variable contributions to the overall predictions. SHAP works by using Shapley values to assign an importance score to each feature for a given prediction. The Shapley value of a feature is calculated by comparing the contribution of that feature to the prediction with and without it included. Specifically, SHAP estimates the expected value of the model's prediction when a feature is present (using a weighted average of predictions for all possible combinations of features), subtracts the expected value when the feature is absent, and averages the difference across all possible combinations of features. This yields the Shapley value of the feature, which represents its marginal contribution to the model's output.
 
-![assets](assets/predictive_analysis/random_forest/model1_8.png)
+We have randomly picked 2 sarcasm cases and 2 non-sarcasm cases from the test set to understand what makes the model predict something as sarcasm and something as not-sarcasm. This allows us to understand which features contribute the most. The red part indicates the the feature is pushing the prediction towards the positive class (Sarcasm in our case) while the blue part indicates negative shap values and large blue parts indicate that the variable is pusing the prediction towards the negative class (Not Sarcasm in our case)
 
-![assets](assets/predictive_analysis/random_forest/model1_9.png)
+* `Example 1 (Label = Sarcasm or 1)`: We can see from the plot below that the subreddit not being the AskReddit subreddit is contributing largely towards the comment being a sarcastic comment. This makes sense because AskReddit is usually a serious subreddit where people tend to ask serious questions and other people try to answer. Hence, it would make sense that these comments would have a lower amount of sarcasm. Other than this, we can also see that negative values of principal components like component 6 and component 2 contributing towards making a comment a sarcastic comment. However, as we mentioned before, it gets difficult to interpret these compoenents due to the transformations.
 
 ![assets](assets/predictive_analysis/random_forest/model1_10.png)
 
+<br>
+
+* `Example 2 (Label = Sarcasm or 1)`: We can see a similar pattern for the subreddit AskReddit in this case too. But the most important feature here seems to be the component 2 which seems to be making the largest contribution towards making a comment sarcastic. This indicates that component 2 could be composed of some word vectors that are usually very common among sarcastic comments. 
+
 ![assets](assets/predictive_analysis/random_forest/model1_11.png)
 
+<br>
+
+* `Example 3 (Label = Not-Sarcasm or 0)`: In this case too the comment not being from the subreddit AskReddit and the subreddit being world news seems to be pushing the comment towards being a sarcastic comment. This makes sense because world news could have people talking about politics and some controversial topics which also would have a higher chance of making something sarcastic. However, the positive values of Component 1 and Component 3 really pushes the prediction towards being Not Sarcasm. This indicates that these two principal components are probably composed of word vectors that usually have words that are not indicative of sarcasm. 
+
+![assets](assets/predictive_analysis/random_forest/model1_8.png)
+
+<br>
+
+* `Example 4 (Label = Not-Sarcasm or 0)`: This case is also very similar to Example 3. However, it gets an even stronger push towards the comment not being Non Sarcastic because the flag for Subreddit AskReddit is 1 and it also has a large positive value for component 3. Hence, this is surely a serious or neutral comment that is definitely not sarcasm.
+
+![assets](assets/predictive_analysis/random_forest/model1_9.png)
+
+
+In summary, we have noted that more serious subreddits with more serious topics of discussion like AskReddit makes the comment more likely to be non sarcastic whereas subreddits with more hot topics or controversial topics of discussion like worldnews or politics could increase the chances of a comment being sarcastic. Additionally, we also noted that component 2 is potentially made up of word vectors that are very indicative of sarcasm whereas components 1 and 3 are made up of word vectors that indicative of something not being a sarcasm. We will need to use the untransformed model to actually understand what these words could be. This makes sense because there are some words that can have a very good indication of a sarcastic connotation like "Yeah, what a wonderful surpise". Here, someone could be talking about a statement that a politician has recently made and the combination of the words "Yeah" and "what" could also be a major contributing factor to the sarcastic connotation. Hence, from this analysis we can see that there are few key words that can have very strong sarcastic connotation and there are also certain topics of discussion that can generate more sarcastic comments. 
+
+<br>
 
 ### Random Forest without Transformed Features i.e. using the base features (RF Model 2)
 
@@ -123,6 +152,14 @@ Hence, all these reasons make Random Forest a sensible choice for the problem th
 
 **RF Model 2 - Feature Importance Plot**  
 
+Simialr to what we have done for RF Model 1, we have also extracted the feature importance values for RF Model 2. This one is easier to interpet since it has the actual words instead of the transformed components. We can see that the top features include the indication variables for the three subreddits - AskReddit, worldnews, and politics. 
+
+In addition to this, we can also see key phrases or words like `"Yeah", "Right", "Sure", "Obviously"` coming up among the top features. These are all words that can have very strong sarcastic connotations. For example, the phrase `"Yeah, Sure! Why not"` could have a very strong sarcastic tone and there would be a very high chance that this comment was sarcastic depending on the context.
+
+Other than this, we can also see that there are numeric features like `Score` (calcualted as Upvotes - Downvotes) of the comment and  `Age of the account` coming up among the top 15 features. This makes sense because some sarcastic comments with a funny tone or funny context could get very popular and have high scores. It can also even have extremely negative scores if the sarcastic comment appeared in an inappropriate context. Hence, sarcastic comments could have extreme values for scores. 
+
+Finally, we can also see the `topic labels` extracted from the topic analysis showing up among the top features. These topics are also indicative of the broad topic of the comment and can serve a similar pupose to the subreddit name but at a more granular level. For example, Topic 1 indicates casual conversation and topic 2 indicates conversations about relationship and personal matters. These two topics would ideally have a lower chance of having a sarcastic connotation. Whereas, topic label 3 indicates politics and current events and that would ideally have a higher chance of being a sarcastic comment. Hence, it also makes sense that the topic labels are among the top variables. 
+
 ![assets](assets/predictive_analysis/random_forest/model2_7.png)
 
 
@@ -130,14 +167,37 @@ Hence, all these reasons make Random Forest a sensible choice for the problem th
 
 **RF Model 2 - Model Interpetation using Shapely Additive Explanations (SHAP)**  
 
+Similar to RF Model 1 we have used SHAP for performing a deeper analysis of the variable contributions towards making a comment sarcastic or not sarcastic. This will help us dive deeper and understand what exactly contributes to making something a sarcastic comment. The untransformed features will also allow us to understand which words or phrases have a bigger contribution towards making something sarcastic. 
 
-![assets](assets/predictive_analysis/random_forest/model2_8.png)
-
-![assets](assets/predictive_analysis/random_forest/model2_9.png)
+* `Example 1 (Label = Sarcasm or 1)`: This is a strong sarcastic comment and that is being driven due to multiple factors as we can see from the plot below. The comment is not from the AskReddit subreddit and it belongs to the politics subreddit. As we have mentioned earlier, political topics are more likely to generate sarcasm in the from of criticism. The other key variables related to the word vectors for the comments are also strong contributors. These are words like `need`, `world`, `people` which indicates that it is a political topic. `Need` is the most important contributor and it could be because the word might be used in a sarcastic context probably about something that is not actually needed. It seems to be a politics related critcism. For example, it would be used in a context like `I need more stress in my life` where it seems to have a very sarcastic tone. 
 
 ![assets](assets/predictive_analysis/random_forest/model2_10.png)
 
+<br>
+
+* `Example 2 (Label = Sarcasm or 1)`: This one is also a very strong sarcastic comment and the prediction is being driven by the word `Yeah` which is deinitely a very strong word related to sarcasm. For example, there are various scenarios wehre this could be used in a sarcastic connotation like `"yeah, right"`, `"yeah, that's totally believable"` or `"Yeah, like that's going to happen"`. This makes the presence of the word `yeah` a very strong indicator of sarcasm. This is even further corroborated by the subreddit indicator which indicates that the topic of discussion is related to `world news`. Further, it also does not belong to either Topic 1 or Topic 2 based on the topic analysis that was performed. All these combined makes it a very strong candidate for sarcasm. 
+
 ![assets](assets/predictive_analysis/random_forest/model2_11.png)
+
+<br>
+
+* `Example 3 (Label = Not Sarcasm or 0)`: This is an example that is not very straightforward. The topic of discussion is `politics` as indicated by the subreddit. However, the `Topic Label is 1` indicating that is is a `casual conversation` and it also does not contain the word `yeah`. These two variables combined drives it towards not being a sarcastic comment. It could probably be people having a casual conversation about a political topic. 
+
+![assets](assets/predictive_analysis/random_forest/model2_8.png)
+
+<br>
+
+* `Example 4 (Label = Not Sarcasm or 0)`: This is a strong Non-Sarcastic comment being driven by two main factors. It belongs to the subreddit AskReddit indicating that it is either a neutral or a serious discussion. Additionally, the topic label indicator also shows us that it is a casual conversation. 
+
+![assets](assets/predictive_analysis/random_forest/model2_9.png)
+
+
+In summary, based on the second Random Forest Models, we can make the following conclusions about what drives the comment to be either sarcastic or non-sarcastic. 
+* Hot Topics that can trigger criticism and debate like `politics` and `worldnews` have a higher likelihood of being sarcastic
+* Words and Pharases like `Yeah`, `Right`, `Sure`, `Obviously`, `Need`, etc. can have a very strong sarcastic connotation. Some examples are:
+    `"yeah, right"`, `"yeah, that's totally believable"`, `"Yeah, because that's a great idea"`, `"Just what I needed."`, `"Sure, that's just what I wanted."`
+* Neutral topics of discussion like casual conversations, relationhips and personal matters, questions, and serious topics have a higher chance of being non-sarcastic. 
+* Sarcastic comments can have more extreme scores in terms of upvotes and downvotes. 
 
 
 <br><br><br>
