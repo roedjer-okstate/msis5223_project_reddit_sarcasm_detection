@@ -318,7 +318,7 @@ Based on all the observations above, our final recommendation is to use the `RF 
     * `Recall`: 0.70
     * `Precision`: 0.71
 
-Our second recommendation is that if we are more interested in the predictive power of the model and correctly predicting both the sarcasm and non-sarcasm cases correctly, and interpretability if not a major requirement, then, `RF Model 1` is the better choice of model. It has a much lower number of False Positives and performs very well for both Sarcasm and Non-Sarcasm cases. This is a good model too, if we want to are interested in reducing the number of false positives.
+Our second recommendation is that if we are `more interested in the predictive power of the model` and correctly predicting both the sarcasm and non-sarcasm cases correctly, and `interpretability is not a major requirement`, then, `RF Model 1` is the better choice of model. It has a much lower number of False Positives and performs very well for both Sarcasm and Non-Sarcasm cases. This is a good model too, if we want to are `interested in reducing the number of false positives`.
 * Performance Metrics for RF Model 2:
     * `AUC Score`: 0.81
     * `F1 Score`: 0.72
