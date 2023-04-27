@@ -1620,16 +1620,91 @@ Our second recommendation is that if we are `more interested in the predictive p
 <br>
 
 # Conclusion and Discussion
+
+**Key takeaways of each analysis:**
+
+*Descriptive analysis*
+
+- Sarcasm rate on Reddit decreased slightly over the years but sum of sarcasms increased exponentially over the years due to growing number of Redditors. In contrast, sarcasm rate on Reddit had virtually no correlation to user tenure as Redditor meaning that new and old users had the same tendency to be sarcastic.
+
+- In terms of Subreddit, `politics` and `worldnews` with politically-focused discussions had the highest sarcasm probability while `AskReddit` with neutral nature had the least sarcasm probability.
+
+- In terms of Reddit self-defined Score for posts/comments, higher scores tend to correspond with lower sarcasm rates. In contrast, users' engagement on Reddit, as measured by their karma counts, did not necessarily affect their tendency to use sarcasm.
+
+*Sentiment analysis*
+
+- `Trust` vs. `Fear`: Trust was more common in our dataset than fear. Also, both trust and fear emotions were less commonly expressed when it came to sarcasm. In short, Redditors were being less sarcastic when expressing trust and fear sentiments.
+
+- `Surprise` vs. `Disgust`: Surprise and disgust emotions were equally common in the dataset. However, disgust emotions were more commonly expressed when it came to sarcasm as compared to surprise. In short, Redditors were being more sarcastic when expressing disgust sentiments.
+
+*Topic Analysis*
+
+- Comments on `Topic #0` (Casual Conversations) was highly associated with sarcasm. This imply that Redditors were more comfortable to be sarcastic for day-to-day conversations as receivers tend not to take it seriously or personally.
+
+- Comments on `Topic #1` (Relationships and Personal Reflections) had the least probability of being labelled as sarcastic as these topics tend to be more emotionally charged and sensitive. In such situations, people may feel that sarcasm could be perceived as hurtful or dismissive of the other person's feelings.
+
+- Comments on `Topic #2` (Mixed Topics) had average probability of sarcasm. This topic was too general to be conclusive. However, despite being a general topic, there was one common phrase "government" showing up in this topic indicating that it might cause a spike in sarcasm rate.
+
+- Comments on `Topic #3` (Politics and Current Events) was highly associated with sarcasm and it aligns to the mentioned result of descriptive analysis where `politics` and `worldnews` subreddit were highly related to sarcasm.
+
+*Named-Entity Recognition Analysis*
+
+- `PERSON` entity: Top 10 most commonly mentioned people's names in this dataset were related to politics like "Trump", "Obama", and "Hilary". The results also align to previous analysis as those mentioned names were highly associated to sarcasm.
+
+- `LOCATION` entity: Top 10 most commonly mentioned locations in this dataset were related to geo-politics or world events like "America", "Israel", and "Russia". The results also align to previous analysis as those mentioned locations were highly associated to sarcasm.
+
+- `ORGANIZATION` entity: Top 10 most commonly mentioned organizations in this dataset were related to politics and world events like "US", "ISIS", and "Republican". The results also align to previous analysis as those mentioned organizations were highly associated to sarcasm.
+
+*Modeling*
+- `RF Model 1` had the best performance for sarcasm prediction on Reddit comments with AUC of ROC of 0.81 but interpretation was difficult. If interpretation of model had to be taken into consideration, `RF Model 2` was the easiest to be interpreted while having a decent AUC of ROC of 0.79.
+
+- Based on the `RF Model 2` interpretation, there are a few insights to see what drives sarcasm in Reddit comments. 
+Subreddits like `politics` and `worldnews` had a higher likelihood of being sarcastic. Secondly, words and phrases like `Yeah`, `Right`, `Sure`, `Obviously`, `Need` drove sarcastic comments. Moreover, neutral topics of discussion like casual conversations, relationships and personal matters, questions, and serious topics had a higher chance of being non-sarcastic. Lastly, extreme comment scores in terms of upvotes and downvotes had higher tendency to be more sarcastic. In summary, the model interpretation aligns to the other analytics. <br><br>
+
+**Implications of this research to the people, business, and community**
+
 We see that there is a considerable amount of sarcastic comments on different reddit threads. The ability to detect sarcasm in any text will help summarizing the context of the text better. One application of the sarcasm detector is to help out people (and the social media platform) with better information. In this way, the said social media platform can restrict that post, comment or thread from reaching a lot of people. Sarcastic remarks are often harmful leading to dire consequences. The sarcasm detector should have a positive influence on understanding the way that we do natural language understanding. 
 Following are few potential implications of a sarcasm detector:
+
 1) Improved communication: A sarcasm detector should be help individuals and organizations get better at communicating. People can understand when someone is being sarcastic and therefore could lead to improved communication and fewer misunderstandings.
+
 2) Increased productivity: Sarcasm can be a source of tension or conflict at work. Therefore detecting sarcasm could help reduce tension and improve productivity.
+
 3) Ethical concerns: There are ethical concerns associated with developing and implementing a sarcasm detector. For example, some people may view it as an invasion of privacy or as a way to police speech. There could also be concerns around false positives (i.e., the detector identifying sarcasm where there is none) and false negatives (i.e., the detector failing to identify sarcasm when it is present).
+
 4) Impact on humour: Sarcasm is often used in humour, and a sarcasm detector could have implications for the use of sarcasm in comedy and entertainment. 
+
 5) Marketing: A very common issue that marketeers face is understanding whether the customers actually liked the product or they are being sarcastic in the review that they have left especially on social media platforms. A robust sarcasm detector can help with that kind of targeted marketing as the marketeers will have a better understanding of the review and they can suggest changes to the product and mend their ways in which they target people. 
 
-It is very important to develop a robust sarcasm detector which identifies different situations in which sarcasm is used but not police the speech so much that it is an ethical dilema to deploy the model. 
+It is very important to develop a robust sarcasm detector which identifies different situations in which sarcasm is used but not police the speech so much that it is an ethical dilema to deploy the model. <br><br>
 
+**Limitation of the data and research**
+
+Detecting sarcasm on Reddit can be challenging because of several reasons. Here are some of the limitations for sarcasm detection on Reddit:
+
+- Contextual Ambiguity: Sarcasm relies heavily on context, tone, and intonation, which can be difficult to discern in written text. On Reddit, the lack of visual cues, such as facial expressions or tone of voice, makes it harder to detect sarcasm accurately.
+
+- Irony and Satire: Sarcasm is closely related to irony and satire, which can also be challenging to detect in written text. Irony involves saying something but meaning the opposite, while satire uses humor and ridicule to expose the flaws of a person or society. Both of these can be mistaken for sarcasm and vice versa.
+
+- Complexity and Variability: Sarcasm can be complex and varied, making it difficult to create a single model that can accurately detect sarcasm in all contexts. Reddit users may use a wide range of sarcastic expressions, including puns, hyperbole, and irony, which can be challenging to detect.
+
+- User Intentions: Sarcasm can be used for different purposes, such as humor, criticism, or irony. Detecting sarcasm requires understanding the user's intention behind their comments, which is difficult to do with automated tools.
+
+- Cultural References: Sarcasm can be heavily dependent on cultural references, which may not be understood by all users. Detecting sarcasm requires knowledge of the cultural context and references used in a particular subreddit or community.<br><br>
+
+**Future directions for research**
+
+The research on sarcasm detection on Reddit is an evolving field, and there are several future directions that researchers can take to improve the accuracy of detection. Here are some possible future directions:
+
+- Multi-lingual Sarcasm Detection: Current research in sarcasm detection is mostly focused on English language text. Future research could explore sarcasm detection in other languages, which may require new methods and models.
+
+- Fine-grained Sarcasm Detection: Current models mostly focus on detecting whether a given text is sarcastic or not. However, there is potential for more nuanced models that can detect different types of sarcasm, such as irony or hyperbole.
+
+- Context-aware Sarcasm Detection: Context plays a significant role in detecting sarcasm. Future research can focus on developing context-aware models that can detect sarcasm in specific contexts, such as different subreddits or communities.
+
+- Incorporating User-level Information: User-level information, such as historical comments and demographics, can provide additional context for sarcasm detection. Future research could explore incorporating this information into models to improve accuracy.
+
+- Real-time Sarcasm Detection: Real-time sarcasm detection can be useful in detecting sarcasm in online conversations, social media platforms, and chatbots. Future research could focus on developing real-time detection models that can identify sarcasm as it happens.
 
 <br>
 <br>
