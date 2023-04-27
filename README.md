@@ -1449,10 +1449,10 @@ Focusing on AUC-ROC for sarcasm prediction is particularly useful because sarcas
     </thead>
     <tbody>
         <tr>
-            <td>1</td><td>LR Model 1</td><td>Logistic Regression with PCA Transformed Features</td><td>-</td><td>-</td><td>-</td><td>-</td>
+            <td>1</td><td>LR Model 1</td><td>Logistic Regression with PCA Transformed Features</td><td>0.76</td><td>0.68</td><td>0.70</td><td>0.66</td>
         </tr>
         <tr>
-            <td>2</td><td>LR Model 2</td><td>Logistic Regression without Transformation</td><td>-</td><td>-</td><td>-</td><td>-</td>
+            <td>2</td><td>LR Model 2</td><td>Logistic Regression without Transformation</td><td>0.80</td><td>0.71</td><td>0.77</td><td>0.66</td>
         </tr>
         <tr>
             <td>3</td><td>RF Model 1</td><td>Random Forest with PCA Transformed Features</td><td>0.81</td><td>0.72</td><td>0.75</td><td>0.7</td>
