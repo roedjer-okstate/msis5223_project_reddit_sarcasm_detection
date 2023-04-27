@@ -1260,7 +1260,36 @@ Based on this process, we have set a range of values to search in for each hyper
 
 # Build the Models
 
-We have built the four models (LR Model 1, LR Model 2, RF Model 1, and RF Model 2) models and provided the best sets of parameters along with the model interpreations for each of them below.
+We have built the four models (LR Model 1, LR Model 2, RF Model 1, and RF Model 2) models and provided the best sets of parameters along with the model interpretations for each of them below.
+
+<br>
+
+### Logistic Regression with PCA Transformed Input Features (LR Model 1)
+
+<br>
+
+The feature importance plot for the top 30 most important features in the LR Model 1 is given below. 
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/predictive_analysis/logistic_regression/feature_importance_transf.png)
+
+From this bar plot we can see that the top 2 features in terms of importance are Component 1 derived from the PCA transformation of the Comments TFIDF Vectors & Component 2 derived from the PCA transformation of the Comments TFIDF Vectors. Component 1 seems to be disproportionately the most important feature in predicting sarcastic comments which indicates that it is probably composed of words or terms that show up in the comments that are very indicative of a comment being sarcastic or not. Most of these key terms or words have probably been condensed into these two top principal components. In theory, we know that the maximum variation in the data is being captured by the first Principal Component, followed by the second Principal Component and so on and forth. So, the first two Principal Components being the most important is not surprisiing at all. However, one issue associated with this interpretation is that we cannot actually identify what these components are composed of which reduces the explainability of the model. Hence, as we discussed earlier, we will also be building a model that is solely made up of untransformed features.
+
+Analyzing this bar plot further, we can see from the feature importance plot that the `Name of the Subreddit`, the `Age of the Account` and also the emotions like `disgust` and `surprise` obtained on the comment are also good indicators of sarcasm in a comment. This could be because comparatively serious subreddits are inclusive of all of these kinds of features. Age of the account could be a factor because it is more likely that seasoned users that have been using these platforms for a longer period of time could be more likely to comment something sarcastic. 
+
+<br>
+
+### Logistic Regression without Transformed Features i.e. using the base features (LR Model 2)
+
+<br>
+
+The feature importance plot for the top 30 most important features in the LR Model 2 is given below. 
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/predictive_analysis/logistic_regression/feature_importance_untransf_30.png)
+
+
+Similar to what we have seen for LR Model 1, we have the top 30 important features engaged in this logistic regression model. This one is easier to interpet since it has the actual words instead of the transformed components. We can see that the top features include the variables that suggests sarcasm in a comment. 
+We see the presence of key phrases or words like `"Yeah", "Right", "Sure","That","Know", "Obviously"` coming up among the top features. These are all words that can have very strong sarcastic connotations. For example, the phrase `"Yeah, Sure! Why not"` could have a very strong sarcastic tone and there would be a very high chance that this comment was sarcastic depending on the context. Another example would be `"Yeah, Sure! You do know this? Right?!"`
+
+Other than this, we can also see that the `Ask Reddit` subname is howing up as one of the most important features.  This makes sense as some people will post anything on this thread and the replies will be indeed sarcastic. It can also even have extremely negative scores if the sarcastic comment appeared in an inappropriate context. Hence, sarcastic comments could have extreme values for scores. 
+
 
 <br>
 
