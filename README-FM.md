@@ -66,6 +66,36 @@ Random Forest is a tree-based model that is suitable for both classification and
 
 Hence, all these reasons make Random Forest a sensible choice for the problem that we are trying to tackle.
 
+**Choosing the Best Hyperparameters for the Models**
+
+In order to choose the best set of hyperprameters for our models, we have used the `Validation Set` that was created earlier to tune the models and used a `Randomized Hyperparameter Search Technique`. The metric that we chose to track and tune our models was `AUC (Area Under the ROC Curve)`. This metric will be discussed in detail in the Model Assessment Section below. It essentially measures the ability of a model to distinguish between positive (sarcasm) and negative (non-sarcasm)  classes across all possible threshold values. The hyperparameters will be chosen based on the best AUC score that we are able to obtain on the validation set. 
+
+Some examples of model hyperparameters that we will be tuning are: `maximum depth of the tree`, `number of trees`, `number of data points in the leaf of a tree`, etc. These are parameters that cannot be learned during model training and have to be set by the data scientist. The `Randomized Hyperparameter Search Process` generates random combinations of hyperparameters from a grid of possible values and uses cross-validation to evaluate the performance of each combination. It returns the best hyperparameters that resulted in the highest performance based on a given metric such as AUC Score. 
+
+Based on this process, we have set a range of values to search in for each hyperparameter like the example shown in the image below and the search process will iterate through each of these combination in a randomized manner and chose the best set of values based on the AUC Score.
+
+* `Initial Parameter Search Space`: The values highlighted in yellow are range of possible options and the process will search for the best combination of each of these possible options.  
+
+![assets](assets/predictive_analysis/random_forest/model1_1.png)
+
+* `Best Validation AUC Score Obtained`: These are the best AUC scores obtained on the validation sets  
+
+![assets](assets/predictive_analysis/random_forest/model1_3.png)
+
+![assets](assets/predictive_analysis/random_forest/model2_3.png)
+
+* `Best Set of Hyperparameters based on the AUC Score`: These are the hyperprameters that produced the best Validation AUC Scores. The `max depth` chosen is larger for RF Model 2 and it makes logical sense because that is the model with untransformed features and has a much larger number of input features whereas RF Model 1 uses the PCA Transformed Features having a much lower number of input features to begin with. The `min weight fraction leaf` is also larger for RF Model 2 which makes sense because this parameter controls the size of the tree and setting a higher value results in a smaller tree size. It is helpful to have a smaller tree size for RF Model 2 because of the large number of input features and a smaller tree size can help reduce overfitting. Hence, all the parameter choices make logical sense according to the input data.
+
+![assets](assets/predictive_analysis/random_forest/model1_2.png)
+
+![assets](assets/predictive_analysis/random_forest/model2_2.png)
+
+* `Example of the Hyperparameter Search Process:` This example is for RF Model 2 and the tuning process tracks a ton of metrics including fit time but chooses the best set based on AUC
+
+![assets](assets/predictive_analysis/random_forest/model2_12.png)
+
+
+
 
 <br><br><br>
 
