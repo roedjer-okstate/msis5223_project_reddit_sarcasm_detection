@@ -1466,6 +1466,70 @@ Focusing on AUC-ROC for sarcasm prediction is particularly useful because sarcas
 
 <br>
 
+### Logistic Regression with PCA Transformed Input Features (LR Model 1)
+
+**Strengths of the Model:**
+* LR Model 1 has a good AUC score of 0.76 which tells us that it does a decent job at segregating the sarcastic and non-sarcastic cases in the test dataset.
+* The F1 score is not bad for this model for both the classes. 0.68 F1 score for the sarcasm class and 0.72 F1 score for the non-sarcasm class. The Recall tells us that while this model is doing a decent job at predicting the sarcasm cases, it is doing an okay job at predicting the non-sarcasm cases but we can say that there are a low number of False Positives in this model. 
+* The confusion matrix tells us the observations we have made from the F1 score, Precision and Recall metrics. We can see that compared to the other models, this model is making a lower number of errors in terms of False Positives and is also able to capture a decent number of sarcasm cases correctly.
+
+**Weakness of the Model**
+* Compared to the LR Model 2, this model captures a slightly lower amount of sarcasm cases correctly at the cost of reducing the number of false positives. 
+* While this is a very decent model, it still seems to not be able to capture a lot of sarcasm cases correctly based on the observations from the confusion matrix
+* Finally, as we had seen earlier, even if this model is performing relatively better than the remaining models, the interpretation of this model is very difficult since it uses PCA transformed features and that makes it difficult to understand the true contributions of the various metrics. 
+
+<br>
+
+**LR Model 1 - Classification Report (Test Set)**  
+
+![assets](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/predictive_analysis/logistic_regression/classification%20report_transf.png)
+
+<br>
+
+**LR Model 1 - Area Under the ROC(Receiver Operating Characteristics) Curve (Test Set)** 
+
+![assets](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/predictive_analysis/logistic_regression/ROC%20curve_transf.png)
+
+<br>
+
+**LR Model 1 - Confusion Matrix (Test Set)** 
+
+![assets](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/predictive_analysis/logistic_regression/confusion_matrix_transf.png)
+
+<br>
+
+
+### Logistic Regression without Transformed Features i.e. using the base features (LR Model 2)
+
+**Strengths of the Model:**
+* LR Model 2 has a pretty good AUC score of 0.80 which tells us that it does a decent job at segregating the sarcastic and non-sarcastic cases in the test dataset.
+* The F1 score is also decent for this model for both the classes. 0.71 F1 score for the sarcasm class and 0.77 F1 score for the non-sarcasm class. The Recall tells us that while this model is doing a decent job at predicting the sarcasm cases, it is doing an okay job at predicting the non-sarcasm cases but we can say that there are a low number of False Positives in this model. 
+* The confusion matrix tells us the observations we have made from the F1 score, Precision and Recall metrics. We can see that compared to the other models, this model is making a lower number of errors in terms of False Positives and is also able to capture a decent number of sarcasm cases correctly.
+
+**Weakness of the Model**
+* Compared to LR Model 1, this model seems to have a lot more False Positives. It is able to capture a slightly more number of sarcasm cases correctly but it does so at the cost of a lot more False Positives. Hence, the large number of False Positives is definitely one of the major weaknesses of this model.
+* Due to the higher number of False Positives, it is also not able to capture some cases of Not-Sarcasm correctly and performs worse than the LR Model 1 in terms of F1 score and Recall for the Not-Sarcasm class.
+
+<br>
+
+**LR Model 2 - Classification Report (Test Set)**  
+
+![assets](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/predictive_analysis/logistic_regression/classification%20report_untransf.png)
+
+<br>
+
+**LR Model 2 - Area Under the ROC(Receiver Operating Characteristics) Curve (Test Set)** 
+
+![assets](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/predictive_analysis/logistic_regression/ROC%20curve_untransf.png)
+
+<br>
+
+**LR Model 2 - Confusion Matrix (Test Set)** 
+
+![assets](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/predictive_analysis/logistic_regression/confusion_matrix_untransf.png)
+
+<br>
+
 ### Random Forest with PCA Transformed Input Features (RF Model 1)
 
 **Strengths of the Model:**
