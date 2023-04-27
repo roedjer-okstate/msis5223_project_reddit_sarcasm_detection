@@ -1163,13 +1163,19 @@ We again see that the value of the standard deviation and the median are more or
 
 Now, we look at the distribution of the different 'Subreddit' categories in the predictor variables and the proportion of 1s and 0s in the target variable across the training, validation, and test set for both the transformed and the untransformed data set. 
 
-First, we will look at these proportions in the transformed data set. Below is an image of the same. 
-![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/Transformed%20data%20proportion.png)
+First, we will look at the proportions of the different subreddits in the transformed data set. Below is an image of the same. 
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/Transformed%20data%20proportion_X.png)
+
+Now, we will look at the proportions of the different categories of the target variable in the training, test, and validation data. 
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/Transformed%20data%20proportion_Y.png)
 
 We see that the proportion of the different subreddit categories across the training, test, and validation set is almost the same. The proportion of 1s and 0s (in the target variable) is also almost the same across the three data partitioning groups. 
 
-Now, we will look at these proportions in the untransformed data set. Below is an image of the same. 
-![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/UnTransformed%20data%20proportion.png)
+Secondly, we will look at the proportions of the different subreddits in the transformed data set. Below is an image of the same. 
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/UnTransformed%20data%20proportion_X.png)
+
+Now, we will look at the proportions of the different categories of the target variable in the training, test, and validation data. 
+![](https://github.com/msis5223-pds2-2023spring/project-deliverable-2-cia/blob/main/assets/descriptive%20statistics%20-%20data%20splitting/UnTransformed%20data%20proportion_Y.png)
 
 We see that the proportion of the different subreddit categories across the training, test, and validation set is almost the same. The proportion of 1s and 0s (in the target variable) is also almost the same across the three data partitioning groups. 
 
