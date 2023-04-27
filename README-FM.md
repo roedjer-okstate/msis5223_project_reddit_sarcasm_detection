@@ -158,7 +158,7 @@ In addition to this, we can also see key phrases or words like `"Yeah", "Right",
 
 Other than this, we can also see that there are numeric features like `Score` (calcualted as Upvotes - Downvotes) of the comment and  `Age of the account` coming up among the top 15 features. This makes sense because some sarcastic comments with a funny tone or funny context could get very popular and have high scores. It can also even have extremely negative scores if the sarcastic comment appeared in an inappropriate context. Hence, sarcastic comments could have extreme values for scores. 
 
-Finally, we can also see the `topic labels` extracted from the topic analysis showing up among the top features. These topics are also indicative of the broad topic of the comment and can serve a similar pupose to the subreddit name but at a more granular level. For example, Topic 1 indicates casual conversation and topic 2 indicates conversations about relationship and personal matters. These two topics would ideally have a lower chance of having a sarcastic connotation. Whereas, topic label 3 indicates politics and current events and that would ideally have a higher chance of being a sarcastic comment. Hence, it also makes sense that the topic labels are among the top variables. 
+Finally, we can also see the `topic labels` extracted from the topic analysis showing up among the top features. These topics are also indicative of the broad topic of the comment and can serve a similar pupose to the subreddit name but at a more granular level. For example, Topic 2 indicates mixed topics and Topic 1 indicates conversations about relationship and personal matters. These two topics would ideally have a lower chance of having a sarcastic connotation. Whereas, Topic label 3 indicates politics and current events and that would ideally have a higher chance of being a sarcastic comment. Topic 0 indicates casual conversations with a lot of cuss words being used, so this topic could have more sarcastic cases too. Hence, it also makes sense that the topic labels are among the top variables. 
 
 ![assets](assets/predictive_analysis/random_forest/model2_7.png)
 
@@ -181,13 +181,13 @@ Similar to RF Model 1 we have used SHAP for performing a deeper analysis of the 
 
 <br>
 
-* `Example 3 (Label = Not Sarcasm or 0)`: This is an example that is not very straightforward. The topic of discussion is `politics` as indicated by the subreddit. However, the `Topic Label is 1` indicating that is is a `casual conversation` and it also does not contain the word `yeah`. These two variables combined drives it towards not being a sarcastic comment. It could probably be people having a casual conversation about a political topic. 
+* `Example 3 (Label = Not Sarcasm or 0)`: This is an example that is not very straightforward. The topic of discussion is `politics` as indicated by the subreddit. However, the `Topic Label is 1` indicating that is is a discussion about personal opinions or relationships and it also does not contain the word `yeah`. These two variables combined drives it towards not being a sarcastic comment. It could probably be people having a personal conversation about a political topic. 
 
 ![assets](assets/predictive_analysis/random_forest/model2_8.png)
 
 <br>
 
-* `Example 4 (Label = Not Sarcasm or 0)`: This is a strong Non-Sarcastic comment being driven by two main factors. It belongs to the subreddit AskReddit indicating that it is either a neutral or a serious discussion. Additionally, the topic label indicator also shows us that it is a casual conversation. 
+* `Example 4 (Label = Not Sarcasm or 0)`: This is a strong Non-Sarcastic comment being driven by two main factors. It belongs to the subreddit AskReddit indicating that it is either a neutral or a serious discussion. Additionally, the topic label indicator also shows us that it is a discussion about relationships or personal matters indicating that it could be serious or neutral discussion. 
 
 ![assets](assets/predictive_analysis/random_forest/model2_9.png)
 
@@ -205,7 +205,57 @@ In summary, based on the second Random Forest Models, we can make the following 
 # Assess the Models
 
 
+### Choice of Metrics
+
+We decided to focus on `four key metrics` for assessing our models and all the assessment was carried out on the `test set` for assessing the final performance of the models. All the metrics mentioned in this section are reported based on the test set. These three key metrics are:
+1. **`Precision`**: Precision tells us out of the cases that our model is predicting as Sarcasm how many cases are turning out to actually be sarcasm. In other words, it measures the accuracy of the positive predictions made by the model. Sarcasm can be a relatively quite difficult to identify since it is not a very simple and straightforward emotion. As such, we do not want the model to falsely predict the non-sarcastic cases as sarcasm which could have detrimental effects and increase the number of false positives. 
+
+2. **`Recall`**: Recall tells us out of the actual Sarcasm cases that are there in the dataset, how many cases the model is able to predict correctly. A high value of recall would mean that the model is very accurate in capturing the sarcasm cases. Since, sarcasm is likely to be a relatively rare and difficult emotion to capture compared to other sentiments or emotions, it is important that we are able to capture the sarcasm cases correctly even at the cost of a few false positives. 
+
+3. **`F1 Score`**: F1 Score takes into account both the Precision and Recall metrics that we have explained above. It is the harmonic mean of Precision and Recall metrics. It is calculated as  
+$F_1 = 2 \times \frac{precision \times recall}{precision + recall}$  
+Since, we want to have a good Recall score but not have too many false positives i.e. we do not want the precision to drop too low and start predicting a lot of Non Sarcastic cases as Sarcasm, it makes sense for us to focus on `F1 score` which will `take both Precision and Recall into account`.
+
+4. **`AUC (Area Under the ROC Curve)`**: AUC-ROC measures the ability of a model to distinguish between positive and negative classes across all possible threshold values. In other words, it measures the overall performance of a model in terms of true positive rate (sensitivity) and false positive rate (1-specificity) across all possible decision boundaries. While for metrics like Precision, Recall, and F1 Score, we need to use a fixed decision boundary or threshold, for the AUC score we do not need to use any such boundary and we can gauge the performance of the model across different thresholds. It is also an useful tool for chosing the best thresholds.   
+Focusing on AUC-ROC for sarcasm prediction is particularly useful because sarcasm is often a subtle and complex form of communication that can be difficult to detect accurately. A high AUC-ROC indicates that the model is able to effectively differentiate between sarcastic and non-sarcastic comments, which is a critical aspect of accurately predicting sarcasm. Additionally, AUC-ROC can be particularly useful in cases where the class distribution is imbalanced, which is often the case in sarcasm detection tasks where non-sarcastic comments are much more prevalent than sarcastic comments.
+
+**Summary Table of Model Performances:**
+<table>
+    <thead>
+        <tr>
+            <th>S. No</th><th>Model Name</th><th>Model Description</th><th>AUC</th><th>F1 Score</th><th>Precision</th><th>Recall</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td><td>LR Model 1</td><td>Logistic Regression with PCA Transformed Features</td><td>-</td><td>-</td><td>-</td><td>-</td>
+        </tr>
+        <tr>
+            <td>2</td><td>LR Model 2</td><td>Logistic Regression without Transformation</td><td>-</td><td>-</td><td>-</td><td>-</td>
+        </tr>
+        <tr>
+            <td>3</td><td>RF Model 1</td><td>Random Forest with PCA Transformed Features</td><td>0.81</td><td>0.72</td><td>0.75</td><td>0.7</td>
+        </tr>
+        <tr>
+            <td>4</td><td>RF Model 2</td><td>Random Forest without Transformation</td><td>0.79</td><td>0.7</td><td>0.71</td><td>0.7</td>
+        </tr>
+   </tbody>
+</table>
+
+
+<br>
+
 ### Random Forest with PCA Transformed Input Features (RF Model 1)
+
+**Strengths of the Model:**
+* RF Model 1 has a very good AUC score of 0.81 which tells us that it does a decent job at segregating the sarcastic and non-sarcastic cases in the test dataset.
+* The F1 score is also very decent for this model for both the classes. 0.72 F1 score for the sarcasm class and 0.76 F1 score for the non-sarcasm class. The Recall tells us that while this model is doing a decent job at predicting the sarcasm cases, it is doing an even better job at predicting the non-sarcasm cases i.e. there are a low number of False Positives in this model. 
+* The confusion matrix tells us the observations we have made from the F1 score, Precision and Recall metrics. We can see that compared to the other models, this model is making a lower number of errors in terms of False Positives and is also able to capture a decent number of sarcasm cases correctly.
+
+**Weakness of the Model**
+* Compared to the RF Model 2, this model captures a slightly lower amount of sarcasm cases correctly at the cost of reducing the number of false positives. 
+* While this is a very decent model, it still seems to not be able to capture a lot of sarcasm cases correctly based on the observations from the confusion matrix
+* Finally, as we had seen earlier, even if this model is performing relatively better than the remaining models, the interpretation of this model is very difficult since it uses PCA transformed features and that makes it difficult to understand the true contributions of the various metrics. 
 
 <br>
 
@@ -230,6 +280,14 @@ In summary, based on the second Random Forest Models, we can make the following 
 
 ### Random Forest without Transformed Features i.e. using the base features (RF Model 2)
 
+**Strengths of the Model:**
+* This model has a very decent AUC Score at 0.79 which indicates that this model is also able to segregate the sarcasm and not-sarcasm cases in a very decent manner. 
+* The most major strength of this model is its interpretability without a major loss of performance. Since we are using the base untransformed features for this model, we can easily interpret which input variables have a higher contribution towards making a comment sarcastic or not. 
+
+**Weakness of the Model**
+* Compared to RF Model 1, this model seems to have a lot more False Positives. It is able to capture a slightly more number of sarcasm cases correctly but it does so at the cost of a lot more False Postitives. Hence, the large number of False Positives is definitely one of the major weaknesses of this model. 
+* Due to the higher number of False Positives, it is also not able to capture some cases of Not-Sarcasm correctly and performs worse than the RF Model 1 in terms of F1 score and Recall for the Not-Sarcasm class.
+
 <br>
 
 **RF Model 2 - Classification Report (Test Set)**  
@@ -249,3 +307,20 @@ In summary, based on the second Random Forest Models, we can make the following 
 ![assets](assets/predictive_analysis/random_forest/model2_6.png)
 
 <br>
+
+
+### Choice of Final Model
+
+Based on all the observations above, our final recommendation is to use the `RF Model 2` as the final model `if interpretation is a major requirement`. We are recommending this because it performs very well in terms of most of the metrics and is not very far behind RF Model 1 in terms of performance. However, it has a much more superior interpretability without a major loss of performance. Additionally, it also performs slightly better in predicting actual Sarcasm cases albeit at the cost of a few additional false positives.
+* Performance Metrics for RF Model 2:
+    * `AUC Score`: 0.79
+    * `F1 Score`: 0.70
+    * `Recall`: 0.70
+    * `Precision`: 0.71
+
+Our second recommendation is that if we are more interested in the predictive power of the model and correctly predicting both the sarcasm and non-sarcasm cases correctly, and interpretability if not a major requirement, then, `RF Model 1` is the better choice of model. It has a much lower number of False Positives and performs very well for both Sarcasm and Non-Sarcasm cases. This is a good model too, if we want to are interested in reducing the number of false positives.
+* Performance Metrics for RF Model 2:
+    * `AUC Score`: 0.81
+    * `F1 Score`: 0.72
+    * `Recall`: 0.70
+    * `Precision`: 0.75
