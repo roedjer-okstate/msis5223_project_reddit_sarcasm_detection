@@ -1,85 +1,85 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[62]:
+# In[120]:
 
 
 import pandas as pd
 
 
-# In[63]:
+# In[121]:
 
 
 df_X_train_transformed = pd.read_csv('/Users/shreyandattachakraborty/Documents/College Application/Application for Masters/OSU/Study Materials/2nd Semester/MSIS 5223/Assignments/project-deliverable-2-cia/data/predictive_modeling_data/X_train_transformed.csv')
 df_X_train_transformed
 
 
-# In[64]:
+# In[122]:
 
 
 df_X_train_transformed.describe().T
 
 
-# In[65]:
+# In[123]:
 
 
 df_X_train_transformed['subreddit'].value_counts(1)
 
 
-# In[66]:
+# In[124]:
 
 
 df_Y_train_transformed = pd.read_csv('/Users/shreyandattachakraborty/Documents/College Application/Application for Masters/OSU/Study Materials/2nd Semester/MSIS 5223/Assignments/project-deliverable-2-cia/data/predictive_modeling_data/Y_train_transformed.csv')
 df_Y_train_transformed
 
 
-# In[67]:
+# In[125]:
 
 
 df_Y_train_transformed['label'].value_counts(1)
 
 
-# In[68]:
+# In[126]:
 
 
 df_X_test_transformed = pd.read_csv('/Users/shreyandattachakraborty/Documents/College Application/Application for Masters/OSU/Study Materials/2nd Semester/MSIS 5223/Assignments/project-deliverable-2-cia/data/predictive_modeling_data/X_test_transformed.csv')
 df_X_test_transformed
 
 
-# In[69]:
+# In[127]:
 
 
 df_X_test_transformed.describe().T
 
 
-# In[70]:
+# In[128]:
 
 
 df_Y_test_transformed = pd.read_csv('/Users/shreyandattachakraborty/Documents/College Application/Application for Masters/OSU/Study Materials/2nd Semester/MSIS 5223/Assignments/project-deliverable-2-cia/data/predictive_modeling_data/Y_test_transformed.csv')
 df_Y_test_transformed
 
 
-# In[71]:
+# In[129]:
 
 
 df_X_val_transformed = pd.read_csv('/Users/shreyandattachakraborty/Documents/College Application/Application for Masters/OSU/Study Materials/2nd Semester/MSIS 5223/Assignments/project-deliverable-2-cia/data/predictive_modeling_data/X_val_transformed.csv')
 df_X_val_transformed
 
 
-# In[72]:
+# In[130]:
 
 
 df_X_val_transformed.describe().T
 
 
-# In[73]:
+# In[131]:
 
 
 df_Y_val_transformed = pd.read_csv('/Users/shreyandattachakraborty/Documents/College Application/Application for Masters/OSU/Study Materials/2nd Semester/MSIS 5223/Assignments/project-deliverable-2-cia/data/predictive_modeling_data/Y_val_transformed.csv')
 df_Y_val_transformed
 
 
-# In[74]:
+# In[132]:
 
 
 # print('Transformed Data Subr')
@@ -88,13 +88,13 @@ print(df_X_test_transformed['subreddit'].value_counts(1))
 print(df_X_val_transformed['subreddit'].value_counts(1))
 
 
-# In[95]:
+# In[133]:
 
 
 df_X_train_transformed['subreddit'].value_counts(1)[0]
 
 
-# In[116]:
+# In[150]:
 
 
 import numpy as np
@@ -106,18 +106,33 @@ df_transformed_temp = pd.DataFrame({'AskReddit subreddit proportion': [df_X_trai
                                           df_X_test_transformed['subreddit'].value_counts(1)[1]],
                                    'worldnews subreddit proportion': [df_X_train_transformed['subreddit'].value_counts(1)[2],
                                           df_X_val_transformed['subreddit'].value_counts(1)[2],
-                                          df_X_test_transformed['subreddit'].value_counts(1)[2]],
-                                   'Target Variable 1s proportion': [df_Y_train_transformed['label'].value_counts(1)[0],
+                                          df_X_test_transformed['subreddit'].value_counts(1)[2]]}, 
+                                   index=['Training', 'Validation','Test'])
+ax = df_transformed_temp.plot.bar(figsize=(19,8))
+
+for container in ax.containers:
+    ax.bar_label(container)
+
+
+# In[149]:
+
+
+import numpy as np
+df_transformed_temp = pd.DataFrame({'Target Variable 1s proportion': [df_Y_train_transformed['label'].value_counts(1)[0],
                                           df_Y_val_transformed['label'].value_counts(1)[0],
                                           df_Y_test_transformed['label'].value_counts(1)[0]],
                                     'Target Variable 0s proportion': [df_Y_train_transformed['label'].value_counts(1)[1],
                                           df_Y_val_transformed['label'].value_counts(1)[1],
                                           df_Y_test_transformed['label'].value_counts(1)[1]]}, 
                                    index=['Training', 'Validation','Test'])
-ax = df_transformed_temp.plot.bar(figsize=(33,14))
+ax = df_transformed_temp.plot.bar(figsize=(20,12))
 
 for container in ax.containers:
     ax.bar_label(container)
+
+
+
+                                   
 
 
 # In[93]:
@@ -227,16 +242,45 @@ for container in ax.containers:
     ax.bar_label(container)
 
 
-# In[ ]:
+# In[153]:
+
+
+import numpy as np
+df_untransformed_temp = pd.DataFrame({'AskReddit subreddit proportion': [df_X_train_untransformed['subreddit'].value_counts(1)[0],
+                                          df_X_val_untransformed['subreddit'].value_counts(1)[0],
+                                          df_X_test_untransformed['subreddit'].value_counts(1)[0]],
+                                    'politics subreddit proportion': [df_X_train_untransformed['subreddit'].value_counts(1)[1],
+                                          df_X_val_untransformed['subreddit'].value_counts(1)[1],
+                                          df_X_test_untransformed['subreddit'].value_counts(1)[1]],
+                                   'worldnews subreddit proportion': [df_X_train_untransformed['subreddit'].value_counts(1)[2],
+                                          df_X_val_untransformed['subreddit'].value_counts(1)[2],
+                                          df_X_test_untransformed['subreddit'].value_counts(1)[2]]}, 
+                                   index=['Training', 'Validation','Test'])
+ax = df_untransformed_temp.plot.bar(figsize=(19,8))
+
+for container in ax.containers:
+    ax.bar_label(container)
+
+
+# In[154]:
+
+
+import numpy as np
+df_untransformed_temp = pd.DataFrame({'Target Variable 1s proportion': [df_Y_train_untransformed['label'].value_counts(1)[0],
+                                          df_Y_val_untransformed['label'].value_counts(1)[0],
+                                          df_Y_test_untransformed['label'].value_counts(1)[0]],
+                                    'Target Variable 0s proportion': [df_Y_train_untransformed['label'].value_counts(1)[1],
+                                          df_Y_val_untransformed['label'].value_counts(1)[1],
+                                          df_Y_test_untransformed['label'].value_counts(1)[1]]}, 
+                                   index=['Training', 'Validation','Test'])
+ax = df_untransformed_temp.plot.bar(figsize=(20,12))
+
+for container in ax.containers:
+    ax.bar_label(container)
 
 
 
-
-
-# In[ ]:
-
-
-
+                                   
 
 
 # In[ ]:
