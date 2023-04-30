@@ -1615,7 +1615,7 @@ Focusing on AUC-ROC for sarcasm prediction is particularly useful because sarcas
 
 ### Choice of Final Model
 
-Based on all the observations above, our final recommendation is to use the `RF Model 2` as the final model `if interpretation is a major requirement`. We are recommending this because it performs very well in terms of most of the metrics and is not very far behind RF Model 1 in terms of performance. However, it has a much more superior interpretability without a major loss of performance. Additionally, it also performs slightly better in predicting actual Sarcasm cases albeit at the cost of a few additional false positives.
+Based on all the observations above, while the LR model performs quite well based on Precision, it does not do very well in terms of Recall, and the RF models are the more comprehensive models. Our final recommendation is to use the `RF Model 2` as the final model `if interpretation is a major requirement`. We are recommending this because it performs very well in terms of most of the metrics and is not very far behind RF Model 1 in terms of performance. However, it has a much more superior interpretability without a major loss of performance. Additionally, it also performs slightly better in predicting actual Sarcasm cases albeit at the cost of a few additional false positives.
 * Performance Metrics for RF Model 2:
     * `AUC Score`: 0.79
     * `F1 Score`: 0.70
