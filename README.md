@@ -1102,6 +1102,19 @@ The common locations being mentioned in the comments in our dataset are mostly c
 Similarly to locations, the common organizations mentioned in the Reddit comments are highly related to politics and world events like "US", "ISIS", and "Muslim". It aligns to every analysis done previously where `politics` and `worldnews` subreddits are not only common in Reddits, but also having the higher tendency of sarcastic comments. US political party like "GOP" or "Republican" and "DNC" or "Democrats" have balanced sarcasm rate and it may be due to the fact that supporters for each party (cover almost 50% of the voter population for each party) leaving less sarcastic comments and as a result balancing the sarcasm rate.
 
 
+### Classification Models
+
+We have developed classification models too with the objective of predicting whether a reddit comment is `Sarcasm` or `Not-Sarcasm`. This task is essentially a very specifc sub-category of Sentiment Analysis. The classification modeling has been discussed in further detail in the following sections where we will be covering the following aspects of classification modeling:
+1. Data Partition and Sub-Sampling
+2. Summary of the Train-Validation-Test Datasets created in the Data Partitioning Process
+3. Model Selection Process
+4. Development of Models and Interpretations
+5. Model Performance Evaluation and Final Model Selection
+
+We have developed 4 different types of models for this task covering both linear models and tree-based models and we have also used a range of evaluation metrics for a comprehensive evaluation process. Based on the AUC Evaluation metric, our best model for the classification task at hand is a Random Forest Model which scores around 0.81 for the AUC metric. This tells us that this model is indeed quite conclusive and is able to segregate the Sarcasm and Non-Sarcasm cases quite well. The model also scores 0.70 for the F1 score metric which tells us that it performs relatively well for capturing both Sarcasm and Non-Sarcasm cases and is not making a large number of mistakes for one of the categories.  
+However, there is a good scope of improvement for the sarcasm detection models that we have developed. For example, we could increase the nunmber of word & phrase vectors being considered for the model but that would also increase the size of the input data. Another opportunity of improvment could also come from the use of pre-trained word embeddings like `GloVe` and `Word2Vec`. Finally, we can also try to use neural networks architectures like LSTM and RNN which have been proven to be very effective for text based classification problems and for capturing semantic meaning in text analysis problems.  
+
+
 <br><br>
 
 
